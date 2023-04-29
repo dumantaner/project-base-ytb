@@ -1,6 +1,4 @@
-if(process.env.NODE_ENV != "production")
-require("dotenv").config();
-
+if (process.env.NODE_ENV != "production") require("dotenv").config();
 
 var createError = require("http-errors");
 var express = require("express");
@@ -8,14 +6,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var testrouter = require("./routes/test");
-const { log } = require("console");
 
 var app = express();
-
-
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -27,9 +19,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/test", testrouter);
+app.use((req, res, next) => {
+  console.log("Ben app.js te tanımlanan bir middleware'im");
+  next();
+});
+
+app.use('/api',require('./routes/index'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
