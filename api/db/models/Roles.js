@@ -1,4 +1,4 @@
-const mongoose = require("moongoose");
+const mongoose = require("mongoose");
 
 const schema = mongoose.Schema(
   {
@@ -6,15 +6,15 @@ const schema = mongoose.Schema(
     is_active:{type:Boolean,default:true},
     created_by:{
      type: mongoose.SchemaTypes.ObjectId,
-     required:true
-    }
+     required:false
+    },
   },
   {
     versionKey:false,
     timestamps: {
       createdAt: "created_at",
       updatedAt: "updated_at",
-    },
+    }
   }
 );
 
